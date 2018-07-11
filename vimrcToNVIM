@@ -1,0 +1,27 @@
+call plug#begin('~/.vim/plugged')
+
+" Make sure you use single quotes
+Plug 'altercation/vim-colors-solarized'
+plug 'vim-scripts/indentpython.vim'
+Plug 'vim-syntastic/syntastic'
+Plug 'scrooloose/nerdtree'
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+" Initialize plugin system
+set nu
+set clipboard=unnamed
+let python_highlight_all=1
+syntax on
+"python with virtualenv support
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
+call plug#end()
+
+
